@@ -1,4 +1,5 @@
-require('@babel/register')();
+const babelConfig = require('./babel.config.json');
+require('@babel/register')(babelConfig);
 
 const http = require('http');
 const app = require('./app.js');
