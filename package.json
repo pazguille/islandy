@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "build": "node server/builder.js",
-    "dev": "nodemon server/index.js",
-    "start": "node server/index.js"
+    "build": "node pie/server/builder.js",
+    "dev": "nodemon pie/server/index.js",
+    "start": "node pie/server/index.js"
   },
   "author": "Guille Paz",
   "license": "MIT",

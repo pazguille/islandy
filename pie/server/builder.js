@@ -1,6 +1,7 @@
 require('@babel/register')();
 
 const { islands } = require('../manifest');
+islands.boot = './pie/boot.js';
 
 require('esbuild')
   .build({

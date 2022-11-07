@@ -1,6 +1,6 @@
 const { h } = require('preact');
 const { render } = require('preact-render-to-string');
-const { HeadContext } = require('../components/Head');
+const { HeadContext } = require('../Head');
 
 function template({ head, body }) {
   return `

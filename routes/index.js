@@ -1,7 +1,8 @@
 const { h } = require('preact');
-const Head = require('../components/Head');
+const Head = require('../pie/Head');
+const Island = require('../pie/Island.js');
+
 const Layout = require('../components/Layout.js');
-const Island = require('../components/Island.js');
 const Counter = require('../islands/Counter');
 
 module.exports = function Home() {
