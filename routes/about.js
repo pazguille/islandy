@@ -1,5 +1,6 @@
 const { h } = require('preact');
-const Head = require('../components/Head');
+const Head = require('../pie/Head');
+
 const Layout = require('../components/Layout.js');
 
 module.exports = function About() {
