@@ -1,4 +1,4 @@
-# pie 🥧
+# 🥧 pie
 
 > Preact Islands with Express.js
 
