@@ -15,13 +15,13 @@
     "@babel/register": "^7.18.9",
     "@preact/signals": "^1.1.2",
     "body-parser": "^1.19.1",
+    "esbuild": "^0.15.13",
     "express": "^4.17.1",
     "preact": "^10.11.2",
     "preact-render-to-string": "^5.2.6",
     "serialize-javascript": "^6.0.0"
   },
   "devDependencies": {
-    "esbuild": "^0.15.13",
     "nodemon": "^2.0.12"
   },
   "engines": {
