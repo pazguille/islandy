@@ -1,4 +1,5 @@
-require('@babel/register')();
+const babelConfig = require('./babel.config.json');
+require('@babel/register')(babelConfig);
 
 const { islands } = require('../manifest');
 islands.boot = './pie/boot.js';
