@@ -6,19 +6,13 @@
         "modules": "cjs"
       }
     ],
-    [
-      "@babel/preset-react",
-      {
-        "runtime": "automatic",
-        "importSource": "preact"
-      }
-    ]
+    "@babel/preset-react"
   ]
   ,
   "plugins": [
     ["@babel/plugin-transform-react-jsx", {
-      "pragma": "h",
-      "pragmaFrag": "Fragment"
+      "runtime": "automatic",
+      "importSource": "preact"
     }]
   ]
 }

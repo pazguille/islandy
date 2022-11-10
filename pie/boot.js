@@ -11,7 +11,7 @@ window.yieldToMain = function yieldToMain(task) {
 
 function hydrateIsland(island) {
   const component = island.getAttribute('name').toLowerCase();
-  import('/island-' + component + '.js').then((component) => {
+  import('/js/island-' + component + '.js').then((component) => {
     yieldToMain(() => {
       const props = JSON.parse(island.getAttribute('props'));
       hydrate(

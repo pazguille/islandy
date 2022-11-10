@@ -1,4 +1,3 @@
-const { h } = require('preact');
 const express = require('express');
 const bodyParser = require('body-parser');
 const render = require('./render');
