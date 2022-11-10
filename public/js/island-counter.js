@@ -1,7 +1,7 @@
-import{b as l,c as a}from"./chunk-MJT6VIUD.js";import{a as e,b as t}from"./chunk-AE5KAQGK.js";import{b as o,d as i}from"./chunk-MLL2PHCY.js";var d=o((j,s)=>{t();t();var{useSignal:u}=(a(),i(l));function m({start:c=0}){let n=u(c),r=()=>n.value+=1;return e("div",{style:`
+import{b as n}from"./chunk-MPXSTW66.js";import{d as t}from"./chunk-AJ2QNIM7.js";import"./chunk-FM7O2KMF.js";function s({start:o=0}){let e=n(o),r=()=>e.value+=1;return t("div",{style:`
         display: flex;
         gap: 50px;
         align-items: center;
         justify-content: center;
         margin: 25px auto;
-    `,children:[e("button",{className:"btn",onClick:()=>n.value-=1,children:"-1"}),e("output",{children:n.value}),e("button",{className:"btn",onClick:r,children:"+1"})]})}s.exports=m});export default d();
+    `,children:[t("button",{className:"btn",onClick:()=>e.value-=1,children:"-1"}),t("output",{children:e.value}),t("button",{className:"btn",onClick:r,children:"+1"})]})}export{s as default};
