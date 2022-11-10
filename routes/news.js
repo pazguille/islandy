@@ -4,12 +4,11 @@ import News from '../components/News';
 
 export async function get(req, res, next) {
   const news = await fetch(getXboxNewsURL()).then(res => res.json());
-  res.locals.data = news;
+  res.locals = { news };
   next();
 }
 
-export default function NewsPage({ data }) {
-  const news = data;
+export default function NewsPage({ news }) {
   return (
     <Layout section="news">
       <div className="news page page-fixed page-on">

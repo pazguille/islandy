@@ -36,13 +36,11 @@ export async function get(req, res, next) {
   const lcp = hotsale.images.featurepromotionalsquareart ?
   hotsale.images.featurepromotionalsquareart.url : hotsale.images.boxart?.url;
 
-  res.locals.data = { aboveTheFold, hotsale, lcp: lcp + '?w=720&q=70' };
+  res.locals = { aboveTheFold, hotsale, lcp: lcp + '?w=720&q=70' };
   next();
 };
 
-export default function Home({ data }) {
-  const { lcp, hotsale, aboveTheFold } = data;
-
+export default function Home({ lcp, hotsale, aboveTheFold }) {
   return (
     <Layout section="">
       <Head>
