@@ -1,15 +1,14 @@
 import { h } from 'preact';
 import Head from '../pie/Head';
-
 import Layout from '../components/Layout.js';
 
-export default function About() {
+export default function Error404() {
   return (
-    <Layout section="home">
+    <Layout section="error404">
       <Head>
-        <title>ABOUT</title>
+        <title>NOT FOUND</title>
       </Head>
-      <h1>About</h1>
+      <h1>NOT FOUND</h1>
     </Layout>
   );
 };

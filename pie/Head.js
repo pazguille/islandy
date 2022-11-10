@@ -10,6 +10,5 @@ function Head({ children }) {
   return null;
 }
 
-module.exports = Head;
-exports = module.exports;
+exports = module.exports = Head;
 exports.HeadContext = HeadContext;
