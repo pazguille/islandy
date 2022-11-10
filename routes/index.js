@@ -1,15 +1,27 @@
-const { h } = require('preact');
-const Head = require('../pie/Head');
-const Island = require('../pie/Island.js');
+import { h } from 'preact';
+import Head from '../pie/Head';
+import Island from '../pie/Island.js';
 
-const Layout = require('../components/Layout.js');
-const Counter = require('../islands/Counter');
+import Layout from '../components/Layout.js';
+import Counter from '../islands/Counter';
 
-module.exports = function Home() {
+export const middlewares = [
+  (req, res, next) => {
+    res.setHeader("X-Custom-Header", "Hello");
+    next();
+  },
+];
+
+export function get(req, res, next) {
+  res.locals.foo = 'Hello';
+  next();
+};
+
+export default function Home({ foo }) {
   return (
     <Layout section="home">
       <Head>
-        <title>HOME</title>
+        <title>HOME - {foo}</title>
       </Head>
 
       <h1>Home</h1>
