@@ -16,14 +16,12 @@ export async function get(req, res, next) {
     : game.images.screenshot ? game.images.screenshot[0].url
     : game.images.superheroart.url;
 
-  res.locals.data = { game, lcp };
+  res.locals = { game, lcp };
   next();
 }
 
 
-export default function Detail({ data }) {
-  const { game, lcp } = data;
-
+export default function Detail({ game, lcp  }) {
   return (
     <Layout>
       <Head>
