@@ -1,6 +1,5 @@
-import { h } from 'preact';
 import Head from '../pie/Head';
-import Layout from '../components/Layout.js';
+import Layout from '../components/Layout';
 
 export default function Error404() {
   return (

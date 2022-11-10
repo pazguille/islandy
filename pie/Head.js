@@ -1,4 +1,3 @@
-const { h } = require('preact');
 const { useContext } = require('preact/hooks');
 const { createContext } = require('preact');
 

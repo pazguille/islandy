@@ -1,4 +1,3 @@
-const { h } = require('preact');
 const serialize = require('serialize-javascript');
 
 module.exports = function Island(props) {

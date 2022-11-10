@@ -12,7 +12,11 @@ module.exports = function document({ head, body, props }) {
       <body>
         ${body}
         <script>
-          window.addEventListener('load', () => import('/boot.js'));
+          window.addEventListener('load', () => {
+            if (document.querySelector('p-island')) {
+              import('/js/boot.js');
+            }
+          });
         </script>
       </body>
     </html>

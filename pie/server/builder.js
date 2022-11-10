@@ -3,6 +3,7 @@ require('@babel/register')(babelConfig);
 
 const fs = require('fs');
 const path = require('path');
+const babel = require('./babel.esbuild');
 
 const readdirSync = (p, a = []) => {
   if (fs.statSync(p).isDirectory()) {
@@ -45,17 +46,30 @@ module.exports = {
 
 fs.writeFileSync('manifest.pie.js', manifest);
 
-fs.rmSync('./public', { recursive: true, force: true });
+fs.rmSync('./public/js', { recursive: true, force: true });
 
 const { islands } = require('../../manifest.pie');
 require('esbuild')
   .build({
     entryPoints: islands,
     loader: { '.js': 'jsx' },
-    jsx: 'automatic',
-    jsxImportSource: 'preact',
+    jsxFactory: 'h',
+    jsxFragment: 'Fragment',
+    plugins: [
+      babel({
+        config: {
+          presets: ['@babel/preset-react'],
+          plugins: [
+            ['@babel/plugin-transform-react-jsx', {
+              runtime: 'automatic',
+              importSource: 'preact'
+            }]
+          ]
+        },
+      })
+    ],
     format: 'esm',
-    outdir: 'public',
+    outdir: 'public/js',
     target: ['chrome99', 'firefox99', 'safari15'],
     bundle: true,
     treeShaking: true,
@@ -65,4 +79,7 @@ require('esbuild')
     write: true,
     watch: false,
   })
-  .catch(() => process.exit(1));
+  .catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
