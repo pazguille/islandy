@@ -1,6 +1,6 @@
-const { useSignal } = require('@preact/signals');
+import { useSignal } from '@preact/signals';
 
-function Counter({ start = 0 }) {
+export default function Counter({ start = 0 }) {
   const count = useSignal(start);
   const increment = () => count.value += 1;
   const decrement = () => count.value -= 1;
@@ -18,5 +18,3 @@ function Counter({ start = 0 }) {
     </div>
   );
 }
-
-module.exports = Counter;
