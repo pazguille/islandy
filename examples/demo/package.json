@@ -1,0 +1,19 @@
+{
+  "name": "islandy-demo",
+  "version": "1.0.0",
+  "description": "🏝️ islandy: Preact Islands with Express.js",
+  "scripts": {
+    "build": "islandy build",
+    "dev": "islandy build && islandy dev",
+    "start": "islandy start"
+  },
+  "dependencies": {
+    "@preact/signals": "^1.1.2",
+    "isomorphic-unfetch": "^3.1.0",
+    "islandy": "^1.0.0-alpha.1",
+    "preact": "^10.11.2"
+  },
+  "engines": {
+    "node": ">=16.x"
+  }
+}
