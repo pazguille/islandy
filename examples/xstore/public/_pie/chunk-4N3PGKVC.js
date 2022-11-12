@@ -1,1 +1,0 @@
-import{a as o}from"./chunk-KYFIC2JY.js";var s=e=>`https://api.xstoregames.com/api/videos?game=${e}`;function a(e){return e.toString().normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().trim().replace(/\s+/g,"-").replace(/[^\w-]+/g,"").replace(/--+/g,"-")}var r=o(null);export{s as a,a as b,r as c};
