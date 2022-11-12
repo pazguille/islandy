@@ -1,4 +1,4 @@
-# 🥧 pie
+# 🏝️ islandy
 
 > Preact Islands with Express.js
 
