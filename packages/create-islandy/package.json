@@ -1,0 +1,14 @@
+{
+  "name": "create-islandy",
+  "version": "1.0.0-alpha.1",
+  "description": "",
+  "author": "Guille Paz",
+  "license": "MIT",
+  "dependencies": {
+    "giget": "^0.1.7"
+  },
+  "engines": {
+    "node": ">=16.x"
+  },
+  "bin": "./index.js"
+}

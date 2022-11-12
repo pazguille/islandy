@@ -3,6 +3,7 @@ module.exports = {
   routes: {
     '/404': require('./routes/404'),
     '/500': require('./routes/500'),
+    '/api/rest': require('./routes/api/rest'),
     '/game/:game': require('./routes/game/[game]'),
     '/': require('./routes/index'),
     '/news': require('./routes/news'),

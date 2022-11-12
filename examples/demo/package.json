@@ -1,5 +1,5 @@
 {
-  "name": "islandy-example",
+  "name": "islandy-demo",
   "version": "1.0.0",
   "description": "🏝️ islandy: Preact Islands with Express.js",
   "scripts": {

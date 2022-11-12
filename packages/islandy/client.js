@@ -1,4 +1,4 @@
-const { h, hydrate } = require('preact');
+import { h, hydrate } from 'preact';
 
 window.yieldToMain = function yieldToMain(task) {
   return new Promise(resolve => {
