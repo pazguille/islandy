@@ -1,12 +1,7 @@
 {
-  "name": "pie",
-  "version": "1.0.0",
-  "description": "",
-  "scripts": {
-    "build": "node pie/server/builder.js",
-    "dev": "npm run build && nodemon pie/server/index.js",
-    "start": "node pie/server/index.js"
-  },
+  "name": "islandy",
+  "version": "1.0.0-alpha.1",
+  "description": "🥧 islandy: Preact Islands with Express.js",
   "author": "Guille Paz",
   "license": "MIT",
   "dependencies": {
@@ -14,19 +9,33 @@
     "@babel/preset-env": "^7.20.2",
     "@babel/preset-react": "^7.18.6",
     "@babel/register": "^7.18.9",
-    "@preact/signals": "^1.1.2",
     "body-parser": "^1.19.1",
     "esbuild": "^0.15.13",
     "express": "^4.17.1",
-    "isomorphic-unfetch": "^3.1.0",
-    "preact": "^10.11.2",
+    "giget": "^0.1.7",
     "preact-render-to-string": "^5.2.6",
     "serialize-javascript": "^6.0.0"
   },
-  "devDependencies": {
-    "nodemon": "^2.0.12"
+  "peerDependencies": {
+    "preact": "^10.11.2"
   },
   "engines": {
     "node": ">=16.x"
-  }
+  },
+  "bin": {
+    "islandy": "./bin/cli.js"
+  },
+  "files": [
+    "bin",
+    "app.js",
+    "babel.config.json",
+    "babel.esbuild.js",
+    "builder.js",
+    "client.js",
+    "document.js",
+    "head.js",
+    "island.js",
+    "render.js",
+    "server.js"
+  ]
 }
