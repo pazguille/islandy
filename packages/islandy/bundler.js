@@ -30,7 +30,7 @@ module.exports = {
       routesDir.map(f => {
         const name = f.split('.')[0];
         const path = name.replace('/index', '/').replace(/\[([\w]+)\]/g, ':$1');
-        return `'${path}': require('./routes${name}'),`;
+        return `'${path}': '/routes${name}',`;
       }).join('\n    ')
     }
   },
@@ -80,7 +80,7 @@ require('esbuild')
     minify: true,
     metafile: true,
     write: true,
-    watch: false,
+    watch: process.argv.includes('--watch'),
   })
   .catch((err) => {
     console.error(err);

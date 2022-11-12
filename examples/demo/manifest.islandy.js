@@ -1,12 +1,12 @@
 // DO NOT EDIT.
 module.exports = {
   routes: {
-    '/404': require('./routes/404'),
-    '/500': require('./routes/500'),
-    '/api/rest': require('./routes/api/rest'),
-    '/game/:game': require('./routes/game/[game]'),
-    '/': require('./routes/index'),
-    '/news': require('./routes/news'),
+    '/404': '/routes/404',
+    '/500': '/routes/500',
+    '/api/rest': '/routes/api/rest',
+    '/game/:game': '/routes/game/[game]',
+    '/': '/routes/index',
+    '/news': '/routes/news',
   },
   islands: {
     boot: 'islandy/client.js',
