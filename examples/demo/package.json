@@ -4,7 +4,7 @@
   "description": "🏝️ islandy: Preact Islands with Express.js",
   "scripts": {
     "build": "islandy build",
-    "dev": "islandy build && islandy dev",
+    "dev": "islandy build --watch | islandy dev",
     "start": "islandy start"
   },
   "dependencies": {

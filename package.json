@@ -2,7 +2,7 @@
   "name": "@islandy/monorepo",
   "workspaces": [
     "./packages/*",
-		"./examples/*"
+    "./examples/*"
   ],
   "scripts": {
     "demo": "npm run dev --workspace=examples/demo"
