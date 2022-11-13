@@ -7,7 +7,7 @@ const exec = promisify(require('child_process').exec);
 const cwd = process.cwd();
 
 async function main() {
-  await downloadTemplate('github:pazguille/islandy/examples/demo#package', {
+  await downloadTemplate('github:pazguille/islandy/examples/demo#main', {
       force: true,
       cwd,
       dir: '.',
