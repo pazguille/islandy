@@ -1,0 +1,34 @@
+<!DOCTYPE html><html lang="es-AR"><head>
+        <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, viewport-fit=cover"><link rel="shortcut icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏝️</text></svg>"><title>Islandy Demo</title><link rel="stylesheet" href="/src/styles.css">
+      </head>
+      <body>
+        <header><h1>🏝️ Islandy</h1></header><main><nav><ul><li><h3><a href="/docs/introduction">Introduction</a></h3></li><li><h3><a href="/docs/getting-started">Getting Started</a></h3><ul><li><a href="/docs/getting-started/create-a-project">Create a project</a></li><li><a href="/docs/getting-started/running-locally">Running locally</a></li><li><a href="/docs/getting-started/create-a-route">Create a route</a></li><li><a href="/docs/getting-started/dynamic-routes">Dynamic routes</a></li><li><a href="/docs/getting-started/adding-routes-middlewares">Adding routes middlewares</a></li><li><a href="/docs/getting-started/fetching-data">Fetching data</a></li><li><a href="/docs/getting-started/adding-island-of-interactivity">Adding islands of interactivity</a></li></ul></li></ul></nav><div><h3>Dynamic routes</h3><div><p>Create a dynamic route in Islandy by adding a dynamic segment to the route name in the routes' file name on disk: <code>/hello/[name].js</code>.</p>
+<p>The <code>/about</code> route created on the last page is pretty static. It does not matter what query or path parameters are passed to the route, it will always render the same page. Let's create a <code>/hello/:name</code> that will render a page with a greeting that contains the name passed in the path.</p>
+<p>Route parameters are named URL segments that are used to capture the values specified at their position in the URL. The captured values are populated in the <code>req.params</code> object, with the name of the route parameter specified in the path as their respective keys.</p>
+<p>For example, the <code>/hello/:name</code> route will match the paths <code>/hello/guille</code> and <code>/hello/eevee</code>, but not <code>/hello</code> or <code>/hello/guille/paz</code>.</p>
+<p>Islandy supports dynamic routes out of the box through file system routing. To define routes with route parameters, just put square brackets around that segment in the file name.</p>
+<p>For example the <code>/hello/:name</code> route maps to the file name <code>routes/hello/[name].js</code>.</p>
+<p>Just like the static <code>/about</code> route, the dynamic <code>/hello/:name</code> route will render a page. The module must once again expose a component as a default export. This time the component will receive the matched path segment properties as arguments in its <code>props</code> object though.</p>
+<pre><code class="language-js">// routes/hello/[name].js
+
+export default function Hello(props) {
+  const { name } = props.params;
+  return (
+    &lt;main&gt;
+      &lt;p&gt;Hello, {name}!&lt;/p&gt;
+    &lt;/main&gt;
+  );
+}
+</code></pre>
+<p>Navigating to <code>https://localhost:8080/hello/pazguille</code> will now render a page showing "Hello, pazguille!".</p>
+</div></div></main>
+        <script>
+          window.addEventListener('load', () => {
+            if (document.querySelector('p-island')) {
+              import('/_islandy/boot.js');
+            }
+          });
+        </script>
+      
+    
+  </body></html>

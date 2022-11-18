@@ -5,6 +5,7 @@ const commands = {
   dev: () => {
     process.env.NODE_ENV = 'development';
     require('../server.js');
+
   },
   start: () => {
     process.env.NODE_ENV = 'production';

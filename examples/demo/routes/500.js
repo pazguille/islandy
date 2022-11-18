@@ -14,7 +14,7 @@ export default function Error500() {
       <Head>
         <title>OOPS!</title>
       </Head>
-      <h1>OOPS!</h1>
+      <h2>OOPS!</h2>
     </Layout>
   );
 };

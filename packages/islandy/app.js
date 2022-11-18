@@ -6,13 +6,17 @@ const cookieParser = require('cookie-parser');
 const hpp = require('hpp');
 const Youch = require('youch');
 const render = require('./render');
+const { generateManifest } = require('./bundler');
 
-const app = express();
+const cwd = process.cwd();
+const { routes } = require(`${cwd}/manifest.islandy`);
 
 const staticConfig = process.env.NODE_ENV === 'production' ? { cacheControl: true, setHeaders: (res, path) => {
   res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
 }} : null;
 
+const router = express.Router();
+const app = express();
 app.use(express.static('public', staticConfig));
 app.use(compression());
 app.use(helmet({
@@ -24,56 +28,77 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(hpp());
 
-const cwd = process.cwd();
-const { routes } = require(`${cwd}/manifest.islandy`);
-
-if (process.env.NODE_ENV !== 'production') {
-  const chokidar = require('chokidar');
-  chokidar.watch(process.cwd(), { ignored: /node_modules/ }).on('change', (f) => {
-    Object.keys(require.cache).forEach((id) => {
-      if (id === f) {
-        delete require.cache[id];
-      }
-    });
-    for (const path of Object.values(routes)) {
-      delete require.cache[cwd + path + '.js'];
-    }
-  });
+function updateRouter() {
+  delete require.cache[`${cwd}/manifest.islandy.js`];
+  const { routes } = require(`${cwd}/manifest.islandy`);
+  router.stack = [];
 
   for (const [path, component] of Object.entries(routes)) {
-    app.get(
+    router.get(
       path,
       require(cwd + component)?.middlewares || [],
       (() => {
         return require(cwd + component)?.get || ((req, res, next) => next());
       })(),
       (req, res) => {
-        res.send(render(require(cwd + component).default, res.locals));
+        res.send(render(require(cwd + component).default, { ...res.locals, params: req.params }));
       },
     );
   }
+}
+
+if (process.env.NODE_ENV !== 'production') {
+  const chokidar = require('chokidar');
+  chokidar.watch(process.cwd(), { ignored: /node_modules/, ignoreInitial: true })
+  .on('add', (f) => {
+    if (f.includes('routes/') || f.includes('islands/')) {
+      generateManifest();
+      updateRouter();
+    }
+  })
+  .on('change', (f) => {
+    Object.keys(require.cache).forEach((id) => {
+      if (id.includes('routes/') || id.includes('islands/') || id.includes('components/')) {
+        delete require.cache[id];
+      }
+    });
+    // for (const path of Object.values(routes)) {
+    //   delete require.cache[cwd + path + '.js'];
+    // }
+  })
+  .on('unlink', (f) => {
+    if (f.includes('routes/') || f.includes('islands/')) {
+      generateManifest();
+      updateRouter();
+    }
+  });
+
+  updateRouter();
 
 } else {
   for (const [path, component] of Object.entries(routes)) {
     const route = require(cwd + component);
-    app.get(
+    router.get(
       path,
       route?.middlewares || [],
       (() => {
         return route?.get || ((req, res, next) => next());
       })(),
       (req, res) => {
-        res.send(render(route.default, res.locals));
+        res.send(render(route.default, { ...res.locals, params: req.params }));
       },
     );
   }
 }
 
+app.use('/', router);
+
 if (routes['/404']) {
+  const route404 = require(cwd + routes['/404']);
   app.use(
-    routes['/404']?.middlewares || [],
+    route404?.middlewares || [],
     (req, res, next) => {
-      res.status(404).send(render(routes['/404'].default, res.locals));
+      res.status(404).send(render(route404.default, { ...res.locals, params: req.params }));
     }
   );
 }
@@ -95,10 +120,11 @@ app.use((error, req, res, next) => {
 });
 
 if (routes['/500']) {
+  const route500 = require(cwd + routes['/500']);
   app.use(
-    routes['/500']?.middlewares || [],
+    route500?.middlewares || [],
     (err, req, res, next) => {
-      res.status(500).send(render(routes['/500'].default, res.locals));
+      res.status(500).send(render(route500.default, { ...res.locals, params: req.params }));
     }
   );
 }

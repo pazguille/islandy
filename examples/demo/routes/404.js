@@ -7,7 +7,7 @@ export default function Error404() {
       <Head>
         <title>NOT FOUND</title>
       </Head>
-      <h1>NOT FOUND</h1>
+      <h2>NOT FOUND</h2>
     </Layout>
   );
 };

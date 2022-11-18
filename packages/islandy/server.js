@@ -1,3 +1,5 @@
+require('isomorphic-unfetch');
+
 const babelConfig = require('./babel.config.json');
 require('@babel/register')({
   ...babelConfig,
@@ -12,10 +14,11 @@ const http = require('http');
 const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
 const app = require('./app.js');
+const config = require(`${process.cwd()}/islandy.config`).default;
 
-const host = '0.0.0.0';
 const keepAliveTimeout = 75000;
-const port = process.env.PORT || 8080;
+const host = config.host || '0.0.0.0';
+const port = config.port || 8080;
 
 function startServer() {
   const server = http.createServer(app);
