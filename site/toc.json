@@ -1,0 +1,17 @@
+{
+  "introduction": {
+    "title": "Introduction"
+  },
+  "getting-started": {
+    "title": "Getting Started",
+    "pages": {
+      "create-a-project": "Create a project",
+      "running-locally": "Running locally",
+      "create-a-route": "Create a route",
+      "dynamic-routes": "Dynamic routes",
+      "adding-routes-middlewares": "Adding routes middlewares",
+      "fetching-data": "Fetching data",
+      "adding-island-of-interactivity": "Adding islands of interactivity"
+    }
+  }
+}

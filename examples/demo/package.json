@@ -9,8 +9,7 @@
   },
   "dependencies": {
     "@preact/signals": "^1.1.2",
-    "isomorphic-unfetch": "^3.1.0",
-    "islandy": "^1.0.0-alpha.2",
+    "islandy": "^1.0.0-alpha.3",
     "preact": "^10.11.2"
   },
   "engines": {

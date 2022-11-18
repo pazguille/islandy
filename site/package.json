@@ -1,0 +1,19 @@
+{
+  "name": "docs-site",
+  "version": "1.0.0",
+  "description": "🏝️ islandy: Preact Islands with Express.js",
+  "scripts": {
+    "dev": "islandy build && islandy dev",
+    "build": "node ./build.js "
+  },
+  "dependencies": {
+    "@preact/signals": "^1.1.2",
+    "islandy": "^1.0.0-alpha.3",
+    "marked": "^4.2.2",
+    "preact": "^10.11.2",
+    "puppeteer": "^19.2.2"
+  },
+  "engines": {
+    "node": ">=16.x"
+  }
+}

@@ -9,8 +9,7 @@ export default function Counter({ start = 0 }) {
         display: flex;
         gap: 50px;
         align-items: center;
-        justify-content: center;
-        margin: 25px auto;
+        margin: 25px 0;
     `}>
       <button className="btn" onClick={decrement}>-1</button>
       <output>{count.value}</output>

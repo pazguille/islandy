@@ -1,1 +1,0 @@
-import{c as e}from"./chunk-VW6XMWRL.js";import"./chunk-HCYFA5FX.js";import{d as l}from"./chunk-RR3VEIDQ.js";import"./chunk-N52V5SXK.js";function o(){let i=e.value;return l("div",{children:i&&i.playlist&&i.playlist.length>0&&i.playlist.map(t=>l("lite-youtube",{videoid:t},t))})}export{o as default};

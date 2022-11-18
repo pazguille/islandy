@@ -1,5 +1,17 @@
 import { h, hydrate } from 'preact';
 
+window.requestIdleCallback = window.requestIdleCallback || function (cb) {
+  var start = Date.now();
+  return setTimeout(function () {
+    cb({
+      didTimeout: false,
+      timeRemaining: function () {
+        return Math.max(0, 50 - (Date.now() - start));
+      }
+    });
+  }, 1);
+};
+
 window.yieldToMain = function yieldToMain(task) {
   return new Promise(resolve => {
     setTimeout(() => {
@@ -7,7 +19,7 @@ window.yieldToMain = function yieldToMain(task) {
       resolve();
     }, 0);
   });
-}
+};
 
 function hydrateIsland(island) {
   const component = island.getAttribute('name').toLowerCase();

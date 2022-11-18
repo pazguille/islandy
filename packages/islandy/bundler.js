@@ -1,12 +1,9 @@
 const babelConfig = require('./babel.config.json');
 require('@babel/register')(babelConfig);
 
+const babel = require('./babel.esbuild');
 const fs = require('fs');
 const path = require('path');
-const babel = require('./babel.esbuild');
-
-const cwd = process.cwd();
-
 const readdirSync = (p, a = []) => {
   if (fs.statSync(p).isDirectory()) {
     fs.readdirSync(p).map(f => {
@@ -20,10 +17,10 @@ const readdirSync = (p, a = []) => {
   return a.map(p => p.replace('routes', ''));
 }
 
-const routesDir = readdirSync('./routes').filter(f => f.endsWith('.js'));
-const islandsDir = fs.readdirSync('./islands');
-
-const manifest = `// DO NOT EDIT.
+function generateManifest() {
+  const routesDir = readdirSync('./routes').filter(f => f.endsWith('.js'));
+  const islandsDir = fs.readdirSync('./islands');
+  const manifest = `// DO NOT EDIT.
 module.exports = {
   routes: {
     ${
@@ -45,13 +42,13 @@ module.exports = {
   }
 };
 `;
+  fs.writeFileSync('manifest.islandy.js', manifest);
+}
+exports.generateManifest = generateManifest;
 
-fs.writeFileSync('manifest.islandy.js', manifest);
-
+generateManifest();
 fs.rmSync('./public/_islandy/', { recursive: true, force: true });
-
-const { islands } = require(`${cwd}/manifest.islandy`);
-
+const { islands } = require(`${process.cwd()}/manifest.islandy`);
 require('esbuild')
   .build({
     entryPoints: islands,
