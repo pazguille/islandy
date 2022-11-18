@@ -1,3 +1,4 @@
+require('dotenv').config();
 require('isomorphic-unfetch');
 
 const babelConfig = require('./babel.config.json');
