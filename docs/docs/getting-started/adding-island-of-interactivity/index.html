@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="es-AR"><head>
+        <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, viewport-fit=cover"><link rel="shortcut icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏝️</text></svg>"><title>Islandy Docs</title><link rel="stylesheet" href="/src/styles.css"><link rel="stylesheet" href="https://unpkg.com/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+      </head>
+      <body>
+        <header><h1>🏝️ Islandy Docs</h1></header><nav><ol><li><a href="/docs/introduction"><strong>Introduction</strong></a></li><li><a href="/docs/getting-started"><strong>Getting Started</strong></a><ol><li><a href="/docs/getting-started/create-a-project">Create a project</a></li><li><a href="/docs/getting-started/running-locally">Running locally</a></li><li><a href="/docs/getting-started/create-a-route">Create a route</a></li><li><a href="/docs/getting-started/dynamic-routes">Dynamic routes</a></li><li><a href="/docs/getting-started/adding-routes-middlewares">Adding routes middlewares</a></li><li><a href="/docs/getting-started/fetching-data">Fetching data</a></li><li><a href="/docs/getting-started/adding-island-of-interactivity">Adding islands of interactivity</a></li></ol></li></ol></nav><main><h1>Adding islands of interactivity</h1><div class="markdown-body"><p>Adding islands of interactivity is a new performance-focused way to add interactive client-side components to your pages.</p>
+<p>The Islands architecture encourages ship less JavaScript to the user with small, focused chunks of interactivity within server-rendered web pages. The output of islands is progressively enhanced HTML, with more specificity around how the enhancement occurs.</p>
+<p>All pages are rendered server side, but you can create island components that are also rendered client side. To do this, Islandy projects have a special <code>islands/</code> folder.</p>
+<p>Here is an example of an island component:</p>
+<pre class="language-js" tabindex="0"><code class="language-js"><span class="token comment">// islands/Counter.js</span>
+
+<span class="token keyword">import</span> <span class="token punctuation">{</span> useSignal <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@preact/signals'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">Counter</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span> start <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> count <span class="token operator">=</span> <span class="token function">useSignal</span><span class="token punctuation">(</span>start<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> <span class="token function-variable function">increment</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> count<span class="token punctuation">.</span>value <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> <span class="token function-variable function">decrement</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> count<span class="token punctuation">.</span>value <span class="token operator">-=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token operator">&lt;</span>div<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>button onClick<span class="token operator">=</span><span class="token punctuation">{</span>decrement<span class="token punctuation">}</span><span class="token operator">&gt;</span><span class="token operator">-</span><span class="token number">1</span><span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>output<span class="token operator">&gt;</span><span class="token punctuation">{</span>count<span class="token punctuation">.</span>value<span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>output<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>button onClick<span class="token operator">=</span><span class="token punctuation">{</span>increment<span class="token punctuation">}</span><span class="token operator">&gt;</span><span class="token operator">+</span><span class="token number">1</span><span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>To include this in a page component, one can just use the component normally. Islandy will take care of automatically mounting the island component on the client with the correct props.</p>
+<pre class="language-js" tabindex="0"><code class="language-js"><span class="token comment">// routes/index.js</span>
+
+<span class="token keyword">import</span> Counter <span class="token keyword">from</span> <span class="token string">"../islands/Counter"</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">Page</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token operator">&lt;</span>main<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>h1<span class="token operator">&gt;</span>Counter Time<span class="token operator">!</span><span class="token operator">&lt;</span><span class="token operator">/</span>h1<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>Counter start<span class="token operator">=</span><span class="token punctuation">{</span><span class="token number">10</span><span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>main<span class="token operator">&gt;</span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>The islands have two special <code>props</code> added by the framework to control how and when the island is initialized:</p>
+<ul>
+<li><code>whenIdle</code> (by default)</li>
+<li><code>whenVisible</code></li>
+</ul>
+<p>Foe example, the page that is rendered on the client now has an interactive counter only when it's visible:</p>
+<pre class="language-js" tabindex="0"><code class="language-js"><span class="token comment">// routes/index.js</span>
+
+<span class="token keyword">import</span> Counter <span class="token keyword">from</span> <span class="token string">"../islands/Counter"</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">Page</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token operator">&lt;</span>main<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>h1<span class="token operator">&gt;</span>Counter Time<span class="token operator">!</span><span class="token operator">&lt;</span><span class="token operator">/</span>h1<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>Counter start<span class="token operator">=</span><span class="token punctuation">{</span><span class="token number">10</span><span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>main<span class="token operator">&gt;</span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><a href="https://jasonformat.com/islands-architecture/">Learn more about Islands Architecture</a>.</p>
+</div></main><script defer="" src="https://unpkg.com/prismjs@1.29.0/prism.js"></script><script defer="" src="https://unpkg.com/prismjs@1.29.0/components/prism-jsx.min.js"></script><script defer="" src="https://unpkg.com/prismjs@1.29.0/components/prism-bash.min.js"></script>
+        <script>
+          window.addEventListener('load', () => {
+            if (document.querySelector('p-island')) {
+              import('/_islandy/boot.js');
+            }
+          });
+        </script>
+      
+    
+  </body></html>

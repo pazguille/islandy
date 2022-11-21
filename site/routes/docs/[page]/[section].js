@@ -1,22 +1,22 @@
 import { readFileSync } from 'fs';
+import { useContext } from 'preact/hooks';
 import { marked } from 'marked';
 import Layout from '../../../components/Layout';
-import Sidebar from '../../../components/Sidebar';
-import toc from '../../../toc.json';
+import { AppContext } from '../../../components/Layout';
 
 export default function Docs({ params }) {
   const section = params.section || 'index';
-  const content = readFileSync(`${process.cwd()}/../docs/${params.page}/${section}.md`, 'utf8');
+  const content = readFileSync(`${process.cwd()}/content/${params.page}/${section}.md`, 'utf8');
+  const { toc } = useContext(AppContext);
 
   return (
     <Layout section="docs">
-      <Sidebar toc={toc} />
-      <div>
-        <h3>{params.section ? toc[params.page].pages[params.section] : toc[params.page].title}</h3>
-        <div
+      <>
+        <h1>{params.section ? toc[params.page].pages[params.section] : toc[params.page].title}</h1>
+        <div class="markdown-body"
           dangerouslySetInnerHTML={{__html: marked.parse(content.toString()) }}
         />
-      </div>
+      </>
     </Layout>
   );
 };
