@@ -16,6 +16,10 @@ Some stand out features:
 - Supports all the features that are offered by Express.js & Preact
 - File-system routing with middlewares
 
+## Demos
+- Islands: https://islandy-demo.fly.dev
+- Zero JS: https://islandy-movies.fly.dev
+
 ## With ❤ by
 
 - Guille Paz (Frontend Web Developer & Web standards lover)
