@@ -1,12 +1,12 @@
 export default function Sidebar({ toc }) {
   return (
     <nav>
-      <ul>
+      <ol>
         {Object.keys(toc).map(s => (
           <li>
-            <h3><a href={`/docs/${s}`}>{toc[s].title}</a></h3>
+            <a href={`/docs/${s}`}><strong>{toc[s].title}</strong></a>
             {
-              toc[s].pages && <ul>
+              toc[s].pages && <ol>
                 {Object.keys(toc[s].pages).map(d => (
                   <li>
                     <a href={`/docs/${s}/${d}`}>
@@ -14,11 +14,11 @@ export default function Sidebar({ toc }) {
                     </a>
                   </li>
                 ))}
-              </ul>
+              </ol>
             }
           </li>
         ))}
-      </ul>
+      </ol>
     </nav>
   );
 }

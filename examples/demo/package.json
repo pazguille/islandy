@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@preact/signals": "^1.1.2",
-    "islandy": "^1.0.0-alpha.3",
+    "islandy": "^1.0.0-alpha.4",
     "preact": "^10.11.2"
   },
   "engines": {

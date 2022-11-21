@@ -1,0 +1,50 @@
+<!DOCTYPE html><html lang="es-AR"><head>
+        <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, viewport-fit=cover"><link rel="shortcut icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏝️</text></svg>"><title>Islandy Docs</title><link rel="stylesheet" href="/src/styles.css"><link rel="stylesheet" href="https://unpkg.com/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+      </head>
+      <body>
+        <header><h1>🏝️ Islandy Docs</h1></header><nav><ol><li><a href="/docs/introduction"><strong>Introduction</strong></a></li><li><a href="/docs/getting-started"><strong>Getting Started</strong></a><ol><li><a href="/docs/getting-started/create-a-project">Create a project</a></li><li><a href="/docs/getting-started/running-locally">Running locally</a></li><li><a href="/docs/getting-started/create-a-route">Create a route</a></li><li><a href="/docs/getting-started/dynamic-routes">Dynamic routes</a></li><li><a href="/docs/getting-started/adding-routes-middlewares">Adding routes middlewares</a></li><li><a href="/docs/getting-started/fetching-data">Fetching data</a></li><li><a href="/docs/getting-started/adding-island-of-interactivity">Adding islands of interactivity</a></li></ol></li></ol></nav><main><h1>Fetching data</h1><div class="markdown-body"><p>You can use the <code>fetch</code> function to fetch data for routes dynamically by creating a <code>get</code> middleware and passing data to <code>res.locals</code>.</p>
+<p>The data that is passed to <code>res.locals</code> can then be accessed via the <code>props</code> field on the page component.</p>
+<p>Here is an example of a route that fetches user data from the GitHub API and renders it in a page component.</p>
+<pre class="language-js" tabindex="0"><code class="language-js"><span class="token comment">// routes/github/[username].js</span>
+
+<span class="token keyword">export</span> <span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">get</span><span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res<span class="token punctuation">,</span> next</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> <span class="token punctuation">{</span> username <span class="token punctuation">}</span> <span class="token operator">=</span> req<span class="token punctuation">.</span>params<span class="token punctuation">;</span>
+
+  <span class="token comment">// fetch just works!</span>
+  <span class="token keyword">const</span> data <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">fetch</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">https://api.github.com/users/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>username<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>data<span class="token punctuation">.</span>status <span class="token operator">!==</span> <span class="token number">404</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> user <span class="token operator">=</span> <span class="token keyword">await</span> data<span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    res<span class="token punctuation">.</span>locals <span class="token operator">=</span> <span class="token punctuation">{</span> user <span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">Page</span><span class="token punctuation">(</span><span class="token parameter">props</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> <span class="token punctuation">{</span> user <span class="token punctuation">}</span> <span class="token operator">=</span> props<span class="token punctuation">;</span>
+
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>user<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token operator">&lt;</span>h1<span class="token operator">&gt;</span>User not found<span class="token operator">&lt;</span><span class="token operator">/</span>h1<span class="token operator">&gt;</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token operator">&lt;</span>div<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>img src<span class="token operator">=</span><span class="token punctuation">{</span>user<span class="token punctuation">.</span>avatar_url<span class="token punctuation">}</span> width<span class="token operator">=</span><span class="token punctuation">{</span><span class="token number">64</span><span class="token punctuation">}</span> height<span class="token operator">=</span><span class="token punctuation">{</span><span class="token number">64</span><span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>h1<span class="token operator">&gt;</span><span class="token punctuation">{</span>user<span class="token punctuation">.</span>name<span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>h1<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>p<span class="token operator">&gt;</span><span class="token punctuation">{</span>user<span class="token punctuation">.</span>login<span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>p<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>
+<p>The <code>fetch</code> function is globaly available via <a href="https://www.npmjs.com/package/isomorphic-unfetch">isomorphic-unfetch</a> module.</p>
+</div></main><script defer="" src="https://unpkg.com/prismjs@1.29.0/prism.js"></script><script defer="" src="https://unpkg.com/prismjs@1.29.0/components/prism-jsx.min.js"></script><script defer="" src="https://unpkg.com/prismjs@1.29.0/components/prism-bash.min.js"></script>
+        <script>
+          window.addEventListener('load', () => {
+            if (document.querySelector('p-island')) {
+              import('/_islandy/boot.js');
+            }
+          });
+        </script>
+      
+    
+  </body></html>

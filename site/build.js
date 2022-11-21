@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 const domain = 'http://localhost:8081';
-const output = `${process.cwd()}/www`;
+const output = `${process.cwd()}/../docs`;
 
 fs.rmSync(output, { recursive: true, force: true });
 fs.mkdirSync(output);
@@ -34,7 +34,7 @@ async function start(urlsToFetch) {
 }
 
 start([
-  '/',
+  '/docs',
   '/docs/introduction',
   '/docs/getting-started',
   '/docs/getting-started/create-a-project',

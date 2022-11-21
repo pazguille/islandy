@@ -1,0 +1,32 @@
+<!DOCTYPE html><html lang="es-AR"><head>
+        <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, viewport-fit=cover"><link rel="shortcut icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏝️</text></svg>"><title>Islandy Docs</title><link rel="stylesheet" href="/src/styles.css"><link rel="stylesheet" href="https://unpkg.com/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+      </head>
+      <body>
+        <header><h1>🏝️ Islandy Docs</h1></header><nav><ol><li><a href="/docs/introduction"><strong>Introduction</strong></a></li><li><a href="/docs/getting-started"><strong>Getting Started</strong></a><ol><li><a href="/docs/getting-started/create-a-project">Create a project</a></li><li><a href="/docs/getting-started/running-locally">Running locally</a></li><li><a href="/docs/getting-started/create-a-route">Create a route</a></li><li><a href="/docs/getting-started/dynamic-routes">Dynamic routes</a></li><li><a href="/docs/getting-started/adding-routes-middlewares">Adding routes middlewares</a></li><li><a href="/docs/getting-started/fetching-data">Fetching data</a></li><li><a href="/docs/getting-started/adding-island-of-interactivity">Adding islands of interactivity</a></li></ol></li></ol></nav><main><h1>Running locally</h1><div class="markdown-body"><p>To start a Islandy project, just run <code>npm run dev</code>. This will start the project, in watch mode.</p>
+<pre><code>$ npm run dev
+
+&gt; islandy-demo@1.0.0 dev
+&gt; islandy build --watch | islandy dev
+
+&gt; App listening on port 8080.
+</code></pre>
+<p>For development, the Islandy server will automatically reload whenever you make a change to your code.</p>
+<p>If you want to change the port, modify the options bag of the <code>islandy.config.js</code> to include an explicit port number:</p>
+<pre class="language-js" tabindex="0"><code class="language-js"><span class="token comment">// islandy.config.js</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token literal-property property">port</span><span class="token operator">:</span> <span class="token number">8080</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>
+<p>If you now visit <a href="http://localhost:8000">http://localhost:8000</a>, you can see the running project. Try change some of the code in <code>routes/index.js</code> and see how the page updates automatically when you save and reload the browser.</p>
+</div></main><script defer="" src="https://unpkg.com/prismjs@1.29.0/prism.js"></script><script defer="" src="https://unpkg.com/prismjs@1.29.0/components/prism-jsx.min.js"></script><script defer="" src="https://unpkg.com/prismjs@1.29.0/components/prism-bash.min.js"></script>
+        <script>
+          window.addEventListener('load', () => {
+            if (document.querySelector('p-island')) {
+              import('/_islandy/boot.js');
+            }
+          });
+        </script>
+      
+    
+  </body></html>

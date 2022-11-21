@@ -1,0 +1,33 @@
+<!DOCTYPE html><html lang="es-AR"><head>
+        <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, viewport-fit=cover"><link rel="shortcut icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏝️</text></svg>"><title>Islandy Docs</title><link rel="stylesheet" href="/src/styles.css"><link rel="stylesheet" href="https://unpkg.com/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+      </head>
+      <body>
+        <header><h1>🏝️ Islandy Docs</h1></header><nav><ol><li><a href="/docs/introduction"><strong>Introduction</strong></a></li><li><a href="/docs/getting-started"><strong>Getting Started</strong></a><ol><li><a href="/docs/getting-started/create-a-project">Create a project</a></li><li><a href="/docs/getting-started/running-locally">Running locally</a></li><li><a href="/docs/getting-started/create-a-route">Create a route</a></li><li><a href="/docs/getting-started/dynamic-routes">Dynamic routes</a></li><li><a href="/docs/getting-started/adding-routes-middlewares">Adding routes middlewares</a></li><li><a href="/docs/getting-started/fetching-data">Fetching data</a></li><li><a href="/docs/getting-started/adding-island-of-interactivity">Adding islands of interactivity</a></li></ol></li></ol></nav><main><h1>Create a route</h1><div class="markdown-body"><p>Create a new route to a Islandy project by creating a new file in the <code>routes/</code> folder.</p>
+<p>After getting the project running locally, the next step is to add a new route to the project. Routes encapsulate the logic for handling requests to a particular path in your project. They can be used to handle API requests or render HTML pages.</p>
+<p>Routes are defined as files in the <code>routes</code> directory. The file name of the module is important: it is used to determine the path that the route will handle. For example, if the file name is <code>index.js</code>, the route will handle requests to <code>/</code>. If the file name is <code>about.js</code>, the route will handle requests
+to <code>/about</code>. If the file name is <code>contact.js</code> and is placed inside of the <code>routes/about/</code> folder, the route will handle requests to <code>/about/contact</code>.</p>
+<p>Route files that render HTML are JavaScript modules that export a JSX component as their default export. This component will be rendered for every request to the route's path. The component receives a few properties that can be used to customize the rendered output, such as the current route, the url of the request, and handler data (more on that later).</p>
+<p>In the demo project we'll create a route to handle the <code>/about</code> page. To do this, one needs to create a new <code>routes/about.js</code> file. In this file, we can declare a component that should be rendered every time a user visits the page. This is done with JSX.</p>
+<pre class="language-js" tabindex="0"><code class="language-js"><span class="token comment">// routes/about.js</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">About</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token operator">&lt;</span>main<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>h1<span class="token operator">&gt;</span>About<span class="token operator">&lt;</span><span class="token operator">/</span>h1<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>p<span class="token operator">&gt;</span>This is the about page<span class="token punctuation">.</span><span class="token operator">&lt;</span><span class="token operator">/</span>p<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>main<span class="token operator">&gt;</span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>The new page will be visible at <code>http://localhost:8080/about</code>.</p>
+</div></main><script defer="" src="https://unpkg.com/prismjs@1.29.0/prism.js"></script><script defer="" src="https://unpkg.com/prismjs@1.29.0/components/prism-jsx.min.js"></script><script defer="" src="https://unpkg.com/prismjs@1.29.0/components/prism-bash.min.js"></script>
+        <script>
+          window.addEventListener('load', () => {
+            if (document.querySelector('p-island')) {
+              import('/_islandy/boot.js');
+            }
+          });
+        </script>
+      
+    
+  </body></html>
